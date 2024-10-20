@@ -20,3 +20,10 @@
 
 # secrets
 secrets.*.js
+
+# Ignore pyc files
+*.pyc
+
+# Ignore the chroma_db directory
+rag/chroma_db/
+
