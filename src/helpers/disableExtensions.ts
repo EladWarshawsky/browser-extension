@@ -1,5 +1,5 @@
 // These are extensions that are known to interfere with the operation of Taxy.
-// We'll turn them off temporarily while Taxy is performing actions.
+// We'll turn them off temporarily while WebChain is performing actions.
 const incompatibleExtensions = [
   // Dashlane
   'fdjamakpfbbddfjaooikfcpapjohcfmg',

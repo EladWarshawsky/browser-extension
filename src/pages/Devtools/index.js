@@ -1,1 +1,1 @@
-chrome.devtools.panels.create('Taxy AI', 'icon-34.png', 'panel.html');
+chrome.devtools.panels.create('WebChain', 'src/assets/img/webagent.png', 'panel.html');

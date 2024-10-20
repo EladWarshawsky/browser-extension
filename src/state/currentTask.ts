@@ -16,6 +16,10 @@ import { getSimplifiedDom } from '../helpers/simplifyDom';
 import { sleep, truthyFilter } from '../helpers/utils';
 import { MyStateCreator } from './store';
 
+//added
+// import fs from 'fs'; // Import fs module for saving files
+
+
 export type TaskHistoryEntry = {
   prompt: string;
   response: string;
@@ -41,6 +45,22 @@ export type CurrentTaskSlice = {
     interrupt: () => void;
   };
 };
+
+// Helper function to prompt the user to download the history as a JSON file
+const promptDownloadHistory = (history: TaskHistoryEntry[]) => {
+  const jsonData = JSON.stringify(history, null, 2); // Convert history to JSON with formatting
+  const blob = new Blob([jsonData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'taskHistory.json'; // Name of the file to download
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url); // Clean up
+};
+
 export const createCurrentTaskSlice: MyStateCreator<CurrentTaskSlice> = (
   set,
   get
@@ -173,6 +193,9 @@ export const createCurrentTaskSlice: MyStateCreator<CurrentTaskSlice> = (
         }
         set((state) => {
           state.currentTask.status = 'success';
+          // Prompt the user to download the history
+          promptDownloadHistory(state.currentTask.history);
+
         });
       } catch (e: any) {
         onError(e.message);
